@@ -15,6 +15,8 @@ public class Utilisateur {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
+    @OneToOne(cascade = CascadeType.ALL) // Tout actionn exercé sur l'utilisateur se repercute sur le profil
+    private Profil profil;
 
     public long getId() {
         return id;
@@ -38,5 +40,13 @@ public class Utilisateur {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Profil getProfil() {
+        return profil;
+    }
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
     }
 }
