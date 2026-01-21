@@ -15,7 +15,7 @@ public class Utilisateur {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL) // Tout actionn exercé sur l'utilisateur se repercute sur le profil
+    @OneToOne(cascade = CascadeType.ALL) // Tout action exercé sur l'utilisateur se repercute sur le profil
     private Profil profil;
 
     public long getId() {
