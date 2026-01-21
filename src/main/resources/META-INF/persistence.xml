@@ -7,7 +7,12 @@
     <persistence-unit name="dfePU" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
-        <class></class>
+        <class>sn.edu.isepat.tic.dfe.p6.entities.Utilisateur</class>
+        <class>sn.edu.isepat.tic.dfe.p6.entities.Profil</class>
+        <class>sn.edu.isepat.tic.dfe.p6.entities.Categorie</class>
+        <class>sn.edu.isepat.tic.dfe.p6.entities.Produit</class>
+        <class>sn.edu.isepat.tic.dfe.p6.entities.Commande</class>
+
 
         <properties>
             <!-- JDBC -->

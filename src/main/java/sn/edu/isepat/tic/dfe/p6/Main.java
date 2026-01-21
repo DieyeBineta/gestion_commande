@@ -1,17 +1,46 @@
 package sn.edu.isepat.tic.dfe.p6;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import sn.edu.isepat.tic.dfe.p6.entities.Categorie;
+import sn.edu.isepat.tic.dfe.p6.entities.Commande;
+import sn.edu.isepat.tic.dfe.p6.entities.Produit;
+import sn.edu.isepat.tic.dfe.p6.entities.StatutCommande;
+
+import java.time.LocalDate;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("dfePU");
+        EntityManager em = emf.createEntityManager();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+        Categorie electronique = new Categorie("Electronique", "Appareils high-tech");
+
+        Produit p1 = new Produit("Laptop HP", 899.99, 15);
+        Produit p2 = new Produit("Souris sans fil", 29.99, 50);
+        Produit p3 = new Produit("Clavier mécanique", 149.99, 20);
+        electronique.ajouterProduit(p1);
+        electronique.ajouterProduit(p2);
+        electronique.ajouterProduit(p3);
+
+        Commande c1 = new Commande(LocalDate.now(), StatutCommande.EN_ATTENTE );
+        c1.ajouterProduit(p1);
+        c1.ajouterProduit(p2);
+        c1.ajouterProduit(p3);
+
+        em.getTransaction().begin();
+
+        em.persist(electronique);
+        em.persist(c1);
+
+        em.getTransaction().commit();
+
+        em.close();
+        emf.close();
     }
 }
+
+// A la suppression d'une categorie, tous les produits appartenant à celle-ci s'effacent aussi
