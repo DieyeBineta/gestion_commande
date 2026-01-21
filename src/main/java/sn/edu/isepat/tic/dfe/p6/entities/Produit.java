@@ -2,6 +2,9 @@ package sn.edu.isepat.tic.dfe.p6.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "produit")
 public class Produit {
@@ -16,6 +19,9 @@ public class Produit {
     @ManyToOne
     @JoinColumn (name = "id_categorie")
     private Categorie categorie;
+
+    @ManyToMany(mappedBy = "produits")
+    private List<Commande> commandes = new ArrayList<>();
 
     public Produit() { }
     public Produit(String nom, double prix, int stock){
@@ -62,5 +68,13 @@ public class Produit {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
     }
 }

@@ -4,7 +4,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import sn.edu.isepat.tic.dfe.p6.entities.Categorie;
+import sn.edu.isepat.tic.dfe.p6.entities.Commande;
 import sn.edu.isepat.tic.dfe.p6.entities.Produit;
+import sn.edu.isepat.tic.dfe.p6.entities.StatutCommande;
+
+import java.time.LocalDate;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -22,9 +26,15 @@ public class Main {
         electronique.ajouterProduit(p2);
         electronique.ajouterProduit(p3);
 
+        Commande c1 = new Commande(LocalDate.now(), StatutCommande.EN_ATTENTE );
+        c1.ajouterProduit(p1);
+        c1.ajouterProduit(p2);
+        c1.ajouterProduit(p3);
+
         em.getTransaction().begin();
 
         em.persist(electronique);
+        em.persist(c1);
 
         em.getTransaction().commit();
 
@@ -33,4 +43,4 @@ public class Main {
     }
 }
 
-// A la suppression d'un categorie, tous les produits appartenant à celui-ci s'effacent aussi
+// A la suppression d'une categorie, tous les produits appartenant à celle-ci s'effacent aussi
