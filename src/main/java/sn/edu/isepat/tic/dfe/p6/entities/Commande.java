@@ -79,4 +79,10 @@ public class Commande {
         p.getCommandes().add(this);
         montantTotal += p.getPrix();
     }
+
+    public void retirerProduit(Produit p) {
+        this.produits.remove(p);
+        p.getCommandes().remove(this);
+        montantTotal -= p.getPrix();
+    }
 }

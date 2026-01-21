@@ -29,7 +29,7 @@ public class Main {
         Commande c1 = new Commande(LocalDate.now(), StatutCommande.EN_ATTENTE );
         c1.ajouterProduit(p1);
         c1.ajouterProduit(p2);
-        c1.ajouterProduit(p3);
+        c1.retirerProduit(p3);
 
         em.getTransaction().begin();
 
